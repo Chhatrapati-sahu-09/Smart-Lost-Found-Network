@@ -1,5 +1,10 @@
 const mongoose = require("mongoose");
 
+/**
+ * User Schema
+ * Defines the structure for user documents in MongoDB
+ * Fields: name, email (unique), password (hashed), createdAt (auto-generated)
+ */
 const userSchema = new mongoose.Schema({
   name: {
     type: String,

@@ -1,28 +1,52 @@
+/**
+ * Login Component
+ * User login form that authenticates against the backend API
+ * On success: stores JWT token in localStorage and redirects to dashboard
+ * On error: displays error message from server
+ */
+
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+  // Form state for email and password
   const [form, setForm] = useState({ email: "", password: "" });
+  // Error message state for displaying API errors
   const [error, setError] = useState("");
+  // React Router navigation hook
   const navigate = useNavigate();
 
+  /**
+   * Handle input field changes
+   * Updates form state with field name and value
+   */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
+  /**
+   * Handle form submission
+   * Sends login credentials to backend API
+   * Saves JWT token to localStorage on success
+   * Displays error message on failure
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // POST request to login endpoint
       const res = await axios.post(
         "http://localhost:5000/api/auth/login",
         form,
       );
+      // Store JWT token for authenticated requests
       localStorage.setItem("token", res.data.token);
       alert("Login Success");
-      navigate("/dashboard"); // Redirect to dashboard after login
+      // Redirect to dashboard after login
+      navigate("/dashboard");
     } catch (err) {
+      // Display error message from server or generic fallback
       setError(err.response?.data?.msg || "Login failed");
     }
   };

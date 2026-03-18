@@ -1,24 +1,50 @@
+/**
+ * Register Component
+ * User registration form that creates a new account
+ * On success: redirects user to login page
+ * On error: displays error message from server
+ *
+ * Fields: name, email (unique), password (will be hashed on backend)
+ */
+
 import { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+  // Form state with name, email, and password fields
   const [form, setForm] = useState({ name: "", email: "", password: "" });
+  // Error message state for displaying API errors
   const [error, setError] = useState("");
+  // React Router navigation hook
   const navigate = useNavigate();
 
+  /**
+   * Handle input field changes
+   * Updates form state with dynamic field names
+   */
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
 
+  /**
+   * Handle form submission
+   * Sends registration data to backend API
+   * Password is hashed on backend by bcryptjs
+   * On success: redirects to login page
+   * On error: displays error message
+   */
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      // POST request to register endpoint
       await axios.post("http://localhost:5000/api/auth/register", form);
       alert("Registered Successfully! Please login.");
+      // Redirect to login page after successful registration
       navigate("/");
     } catch (err) {
+      // Display error message from server or generic fallback
       setError(err.response?.data?.msg || "Registration failed");
     }
   };

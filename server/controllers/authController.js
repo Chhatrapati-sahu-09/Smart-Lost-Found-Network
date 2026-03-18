@@ -2,7 +2,14 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
-// REGISTER
+/**
+ * REGISTER - Creates a new user account with hashed password
+ * POST /api/auth/register
+ * @param {string} name - User's full name
+ * @param {string} email - Unique email address
+ * @param {string} password - Plain password (will be hashed)
+ * Returns: Success message or error
+ */
 exports.register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
@@ -29,7 +36,13 @@ exports.register = async (req, res) => {
   }
 };
 
-// LOGIN
+/**
+ * LOGIN - Authenticates user and returns JWT token
+ * POST /api/auth/login
+ * @param {string} email - User's email address
+ * @param {string} password - User's password (compared with hash)
+ * Returns: JWT token (expires in 7 days) and user data
+ */
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;

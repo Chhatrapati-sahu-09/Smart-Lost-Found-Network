@@ -1,7 +1,19 @@
+/**
+ * Express Server Configuration
+ * Main entry point for the Smart Lost & Found Network API
+ *
+ * Features:
+ * - MongoDB connection with Mongoose
+ * - CORS enabled for frontend requests
+ * - JWT-based authentication
+ * - Express middleware for JSON parsing
+ * - Protected routes with authMiddleware
+ */
+
 const express = require("express");
 const cors = require("cors");
-require("dotenv").config();
-const connectDB = require("./config/db");
+require("dotenv").config(); // Load environment variables from .env file
+const connectDB = require("./config/db"); // MongoDB connection function
 
 const app = express();
 

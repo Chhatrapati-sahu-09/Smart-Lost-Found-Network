@@ -1,8 +1,18 @@
 const jwt = require("jsonwebtoken");
 
+/**
+ * Authentication Middleware
+ * Verifies JWT token from Authorization header
+ * Protects routes that require authentication
+ *
+ * Header format: Authorization: <token> or Authorization: Bearer <token>
+ * Extracts user ID from token and adds to req.user
+ */
 module.exports = function (req, res, next) {
+  // Extract token from Authorization header
   const token = req.headers.authorization;
 
+  // Check if token exists
   if (!token) {
     return res.status(401).json({ msg: "No token, authorization denied" });
   }
