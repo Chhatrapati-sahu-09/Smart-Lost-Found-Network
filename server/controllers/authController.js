@@ -2,6 +2,8 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+const isValidEmail = (email) => /\S+@\S+\.\S+/.test(email);
+
 /**
  * REGISTER - Creates a new user account with hashed password
  * POST /api/auth/register
@@ -13,6 +15,20 @@ const jwt = require("jsonwebtoken");
 exports.register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
+
+    if (!name || !email || !password) {
+      return res.status(400).json({ msg: "All fields are required" });
+    }
+
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ msg: "Please enter a valid email" });
+    }
+
+    if (password.length < 6) {
+      return res
+        .status(400)
+        .json({ msg: "Password must be at least 6 characters" });
+    }
 
     // Check if user exists
     const userExists = await User.findOne({ email });
@@ -46,6 +62,14 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ msg: "Email and password are required" });
+    }
+
+    if (!isValidEmail(email)) {
+      return res.status(400).json({ msg: "Please enter a valid email" });
+    }
 
     // Find user
     const user = await User.findOne({ email });
