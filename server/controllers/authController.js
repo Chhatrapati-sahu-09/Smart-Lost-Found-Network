@@ -19,8 +19,8 @@ exports.register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 
-    const cleanName = name?.trim();
-    const cleanEmail = email?.trim().toLowerCase();
+    const cleanName = typeof name === "string" ? name.trim() : null;
+    const cleanEmail = typeof email === "string" ? email.trim().toLowerCase() : null;
 
     if (!cleanName || !cleanEmail || !password) {
       return badRequest(res, "Name, email and password are required");
@@ -67,7 +67,7 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    const cleanEmail = email?.trim().toLowerCase();
+    const cleanEmail = typeof email === "string" ? email.trim().toLowerCase() : null;
 
     if (!cleanEmail || !password) {
       return badRequest(res, "Email and password are required");
