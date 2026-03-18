@@ -3,6 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const isValidEmail = (email) => /\S+@\S+\.\S+/.test(email);
+const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 
 const badRequest = (res, msg) => res.status(400).json({ msg });
 const serverError = (res) => res.status(500).json({ msg: "Server error" });
@@ -34,8 +35,10 @@ exports.register = async (req, res) => {
       return badRequest(res, "Password must be at least 6 characters");
     }
 
-    // Check if user exists
-    const userExists = await User.findOne({ email: cleanEmail });
+    // Check if user exists (case-insensitive email lookup)
+    const userExists = await User.findOne({
+      email: new RegExp(`^${escapeRegex(cleanEmail)}$`, "i"),
+    });
     if (userExists) {
       return badRequest(res, "User already exists");
     }
@@ -77,8 +80,10 @@ exports.login = async (req, res) => {
       return badRequest(res, "Please enter a valid email");
     }
 
-    // Find user
-    const user = await User.findOne({ email: cleanEmail });
+    // Find user (case-insensitive email lookup)
+    const user = await User.findOne({
+      email: new RegExp(`^${escapeRegex(cleanEmail)}$`, "i"),
+    });
     if (!user) {
       return badRequest(res, "Invalid email or password");
     }
