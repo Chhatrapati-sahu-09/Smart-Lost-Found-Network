@@ -1,6 +1,6 @@
 # Smart Lost & Found Network - Setup Guide
 
-## 📋 Project Structure
+## Project Structure
 
 ```
 .
@@ -30,7 +30,7 @@
     └── .gitignore
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -113,11 +113,25 @@
 
    ```
    VITE v4.1.0  ready in 123 ms
-
-   ➜  Local:   http://localhost:5173/
    ```
 
-## 🧪 Testing
+Local: http://localhost:5173/
+
+````
+
+## Testing
+
+## Request Flow Diagram
+
+```mermaid
+flowchart TD
+FE[fa:fa-laptop Frontend Client] --> R1[fa:fa-sign-in Login Request]
+FE --> R2[fa:fa-user-plus Register Request]
+R1 --> API[fa:fa-server Express API]
+R2 --> API
+API --> DB[fa:fa-database MongoDB]
+API --> JWT[fa:fa-key JWT Token]
+````
 
 ### Using Postman or Thunder Client
 
@@ -177,7 +191,7 @@
 5. Login with your credentials
 6. Success message will appear
 
-## 📝 API Endpoints
+## API Endpoints
 
 | Method | Endpoint             | Description          | Auth Required |
 | ------ | -------------------- | -------------------- | ------------- |
@@ -186,14 +200,14 @@
 | GET    | `/api/test`          | Test protected route | Yes           |
 | GET    | `/`                  | Health check         | No            |
 
-## 🔐 Authentication
+## Authentication
 
 - Passwords are hashed using **bcryptjs** (salt rounds: 10)
 - JWT tokens expire after **7 days**
 - Tokens are stored in browser's localStorage
 - Include token in `Authorization` header for protected routes
 
-## 🛠️ Development Scripts
+## Development Scripts
 
 ### Backend
 
@@ -210,7 +224,7 @@ npm run build   # Build for production
 npm run preview # Preview production build
 ```
 
-## 📦 Dependencies
+## Dependencies
 
 ### Backend
 
@@ -228,7 +242,7 @@ npm run preview # Preview production build
 - **axios** - HTTP client
 - **vite** - Build tool
 
-## 🐛 Common Issues
+## Common Issues
 
 ### MongoDB Connection Error
 
@@ -248,10 +262,10 @@ npm run preview # Preview production build
 - Clear localStorage and re-login if token has expired
 - Check token validity on middleware
 
-## 📄 License
+## License
 
 ISC
 
-## 🤝 Contributing
+## Contributing
 
 Feel free to submit issues and enhancement requests!

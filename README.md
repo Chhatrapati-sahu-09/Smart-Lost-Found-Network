@@ -1,8 +1,8 @@
-"# Smart Lost & Found Network
+# Smart Lost & Found Network
 
 A full-stack web application connecting people who have lost items with those who found them. Built with **React** + **Express.js** + **MongoDB**.
 
-## ✨ Features
+## Features
 
 - **User Authentication** - Secure register/login with JWT tokens
 - **Password Hashing** - bcryptjs for secure password storage
@@ -10,7 +10,7 @@ A full-stack web application connecting people who have lost items with those wh
 - **CORS Enabled** - Cross-origin requests supported
 - **Responsive UI** - Modern frontend with React and Vite
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 ### Backend
 
@@ -26,13 +26,13 @@ A full-stack web application connecting people who have lost items with those wh
 - React Router for navigation
 - Axios for HTTP requests
 
-## 📚 Quick Links
+## Quick Links
 
 - [Setup Guide](./SETUP.md) - Detailed installation and configuration
-- [API Documentation](./SETUP.md#-api-endpoints) - Available endpoints
-- [Testing Guide](./SETUP.md#-testing) - How to test the application
+- [API Documentation](./SETUP.md#api-endpoints) - Available endpoints
+- [Testing Guide](./SETUP.md#testing) - How to test the application
 
-## 🚀 Getting Started
+## Getting Started
 
 ### Prerequisites
 
@@ -61,16 +61,26 @@ npm run dev
 
 The application will be available at `http://localhost:5173`
 
-## 📋 Current Implementation
+## Current Implementation
 
-✅ User registration and login  
-✅ JWT token-based authentication  
-✅ Protected API routes  
-✅ Basic frontend pages (Login/Register)  
-✅ MongoDB integration  
-✅ Error handling and validation
+- User registration and login
+- JWT token-based authentication
+- Protected API routes
+- Basic frontend pages (Login/Register)
+- MongoDB integration
+- Error handling and validation
 
-## 🔄 Next Steps (Optional Features)
+## Architecture Diagram
+
+```mermaid
+flowchart LR
+	U[fa:fa-user User] --> C[fa:fa-desktop React Client]
+	C -->|HTTP API| S[fa:fa-server Express Server]
+	S -->|ODM| D[fa:fa-database MongoDB]
+	S -->|JWT| A[fa:fa-shield Authentication]
+```
+
+## Next Steps (Optional Features)
 
 - Create Lost/Found item listings
 - Add search and filter functionality
@@ -80,28 +90,28 @@ The application will be available at `http://localhost:5173`
 - Add image uploads
 - Implement reviews/ratings
 
-## 📄 Project Structure
+## Project Structure
 
 ```
 Smart_Lost_&_Found_Network/
-├── server/           # Backend API
-│   ├── config/      # Configuration files
-│   ├── models/      # Mongoose schemas
-│   ├── controllers/ # Business logic
-│   ├── routes/      # API routes
-│   ├── middleware/  # Custom middleware
-│   └── server.js    # Entry point
-├── client/          # React frontend
-│   ├── src/
-│   │   ├── pages/  # Page components
-│   │   ├── App.jsx # Main component
-│   │   └── main.jsx # Entry point
-│   └── index.html
-├── SETUP.md         # Setup guide
-└── README.md        # This file
+|-- server/            # Backend API
+|   |-- config/        # Configuration files
+|   |-- models/        # Mongoose schemas
+|   |-- controllers/   # Business logic
+|   |-- routes/        # API routes
+|   |-- middleware/    # Custom middleware
+|   `-- server.js      # Entry point
+|-- client/            # React frontend
+|   |-- src/
+|   |   |-- pages/     # Page components
+|   |   |-- App.jsx    # Main component
+|   |   `-- main.jsx   # Entry point
+|   `-- index.html
+|-- SETUP.md           # Setup guide
+`-- README.md          # This file
 ```
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
@@ -109,14 +119,14 @@ Smart_Lost_&_Found_Network/
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📝 License
+## License
 
 This project is licensed under the ISC License.
 
-## 📧 Support
+## Support
 
 For support, email support@smartlostfound.com or open an issue in the repository.
 
 ---
 
-**Made with ❤️ for connecting lost items with their owners**"
+Made for connecting lost items with their owners.
