@@ -14,6 +14,7 @@ export default function Login() {
   const [form, setForm] = useState({ email: "", password: "" });
   // Error message state for displaying API errors
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
   // React Router navigation hook
   const navigate = useNavigate();
 
@@ -34,7 +35,15 @@ export default function Login() {
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
+
+    if (!form.email || !form.password) {
+      setError("Email and password are required");
+      return;
+    }
+
     try {
+      setLoading(true);
       // POST request to login endpoint
       const res = await axios.post(
         "http://localhost:5000/api/auth/login",
@@ -48,6 +57,8 @@ export default function Login() {
     } catch (err) {
       // Display error message from server or generic fallback
       setError(err.response?.data?.msg || "Login failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -82,7 +93,7 @@ export default function Login() {
             />
           </div>
           <button type="submit" style={styles.button}>
-            Login
+            {loading ? "Logging in..." : "Login"}
           </button>
         </form>
         <p>
