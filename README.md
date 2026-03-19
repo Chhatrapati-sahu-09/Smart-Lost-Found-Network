@@ -1,132 +1,73 @@
 # Smart Lost & Found Network
 
-A full-stack web application connecting people who have lost items with those who found them. Built with **React** + **Express.js** + **MongoDB**.
+A full-stack MERN application that connects people who have lost items with those who have found them, enabling efficient recovery through a centralized digital platform.
+
+---
+
+## Live Demo
+
+(Add your deployed link here)
+
+---
+
+## Problem Statement
+
+Every day, many items are lost without an efficient system to reconnect owners and finders. Existing solutions are often fragmented, manual, or limited in scope.
+
+---
+
+## Solution
+
+The Smart Lost & Found Network provides:
+- A centralized platform to report lost and found items
+- Secure user authentication
+- Scalable backend architecture
+- A foundation for real-time communication and future enhancements
+
+---
 
 ## Features
 
-- **User Authentication** - Secure register/login with JWT tokens
-- **Password Hashing** - bcryptjs for secure password storage
-- **Protected Routes** - Auth middleware for secured endpoints
-- **CORS Enabled** - Cross-origin requests supported
-- **Responsive UI** - Modern frontend with React and Vite
+### Authentication and Security
+- JWT-based authentication
+- Password hashing using bcrypt
+- Protected API routes using middleware
+
+### Backend
+- RESTful API design
+- Input validation and error handling
+- MongoDB integration using Mongoose
+
+### Frontend
+- Responsive UI built with React and Vite
+- Client-side routing using React Router
+- API communication using Axios
+
+---
 
 ## Tech Stack
 
 ### Backend
-
-- Node.js + Express.js
-- MongoDB + Mongoose
-- JWT Authentication
-- bcryptjs for password hashing
+- Node.js
+- Express.js
+- MongoDB
+- Mongoose
+- JSON Web Tokens (JWT)
+- bcryptjs
 
 ### Frontend
-
 - React 18
-- Vite (build tool)
-- React Router for navigation
-- Axios for HTTP requests
-
-## Quick Links
-
-- [Setup Guide](./SETUP.md) - Detailed installation and configuration
-- [API Documentation](./SETUP.md#api-endpoints) - Available endpoints
-- [Testing Guide](./SETUP.md#testing) - How to test the application
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js v14+
-- MongoDB
-- npm or yarn
-
-### Installation
-
-**Backend:**
-
-```bash
-cd server
-npm install
-cp .env.example .env
-npm run dev
-```
-
-**Frontend:**
-
-```bash
-cd client
-npm install
-npm run dev
-```
-
-The application will be available at `http://localhost:5173`
-
-## Current Implementation
-
-- User registration and login
-- JWT token-based authentication
-- Protected API routes
-- Basic frontend pages (Login/Register)
-- MongoDB integration
-- Error handling and validation
-
-## Architecture Diagram
-
-```mermaid
-flowchart LR
-	U[fa:fa-user User] --> C[fa:fa-desktop React Client]
-	C -->|HTTP API| S[fa:fa-server Express Server]
-	S -->|ODM| D[fa:fa-database MongoDB]
-	S -->|JWT| A[fa:fa-shield Authentication]
-```
-
-## Next Steps (Optional Features)
-
-- Create Lost/Found item listings
-- Add search and filter functionality
-- Implement notifications
-- Add user profiles
-- Create messaging system
-- Add image uploads
-- Implement reviews/ratings
-
-## Project Structure
-
-```
-Smart_Lost_&_Found_Network/
-|-- server/            # Backend API
-|   |-- config/        # Configuration files
-|   |-- models/        # Mongoose schemas
-|   |-- controllers/   # Business logic
-|   |-- routes/        # API routes
-|   |-- middleware/    # Custom middleware
-|   `-- server.js      # Entry point
-|-- client/            # React frontend
-|   |-- src/
-|   |   |-- pages/     # Page components
-|   |   |-- App.jsx    # Main component
-|   |   `-- main.jsx   # Entry point
-|   `-- index.html
-|-- SETUP.md           # Setup guide
-`-- README.md          # This file
-```
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the ISC License.
-
-## Support
-
-For support, email support@smartlostfound.com or open an issue in the repository.
+- Vite
+- React Router
+- Axios
 
 ---
 
-Made for connecting lost items with their owners.
+## System Architecture
+
+```mermaid
+flowchart LR
+    U[User] --> C[React Client]
+    C -->|API Calls| S[Express Server]
+    S -->|ODM| D[(MongoDB)]
+    S -->|Authentication| A[JWT Middleware]
