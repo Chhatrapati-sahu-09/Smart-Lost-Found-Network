@@ -7,6 +7,7 @@ export default function Dashboard() {
   const [items, setItems] = useState([]);
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
+  const [location, setLocation] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -20,7 +21,9 @@ export default function Dashboard() {
     const matchesSearch = item.title
       .toLowerCase()
       .includes(search.toLowerCase());
-    return matchesType && matchesSearch;
+    const matchesLocation =
+      !location || item.location?.address?.includes(location);
+    return matchesType && matchesSearch && matchesLocation;
   });
 
   if (loading) {
@@ -63,6 +66,15 @@ export default function Dashboard() {
             Found
           </button>
         </div>
+
+        <select
+          className="border p-2 mb-4"
+          onChange={(e) => setLocation(e.target.value)}
+        >
+          <option value="">All Locations</option>
+          <option value="Delhi">Delhi</option>
+          <option value="Gwalior">Gwalior</option>
+        </select>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {filteredItems.map((item) => (
