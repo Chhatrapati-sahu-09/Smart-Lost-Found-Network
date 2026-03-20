@@ -10,6 +10,7 @@ export default function Dashboard() {
   const [location, setLocation] = useState("");
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [sort, setSort] = useState("latest");
 
   const toggleFav = (id) => {
     setFavorites((prev) =>
@@ -31,6 +32,10 @@ export default function Dashboard() {
     const matchesLocation =
       !location || item.location?.address?.includes(location);
     return matchesType && matchesSearch && matchesLocation;
+  }).sort((a, b) => {
+    const dateA = new Date(a.date);
+    const dateB = new Date(b.date);
+    return sort === "latest" ? dateB - dateA : dateA - dateB;
   });
 
   if (loading) {
@@ -96,6 +101,14 @@ export default function Dashboard() {
           <option value="">All Locations</option>
           <option value="Delhi">Delhi</option>
           <option value="Gwalior">Gwalior</option>
+        </select>
+
+        <select
+          className="border p-2 mb-4 ml-2"
+          onChange={(e) => setSort(e.target.value)}
+        >
+          <option value="latest">Latest First</option>
+          <option value="oldest">Oldest First</option>
         </select>
 
         {filteredItems.length ? (
