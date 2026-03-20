@@ -10,6 +10,7 @@ export default function PostItem() {
     address: "",
   });
   const [image, setImage] = useState(null);
+  const [preview, setPreview] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -60,7 +61,22 @@ export default function PostItem() {
             onChange={(e) => setForm({ ...form, address: e.target.value })}
           />
 
-          <input type="file" onChange={(e) => setImage(e.target.files[0])} />
+          <input
+            type="file"
+            onChange={(e) => {
+              const file = e.target.files[0];
+              setImage(file);
+              if (file) {
+                setPreview(URL.createObjectURL(file));
+              }
+            }}
+          />
+
+          {preview && (
+            <div className="mt-3 border rounded p-2">
+              <img src={preview} alt="Preview" className="w-full max-h-48 object-cover rounded" />
+            </div>
+          )}
 
           <button className="w-full bg-black text-white p-2">Submit</button>
         </form>
