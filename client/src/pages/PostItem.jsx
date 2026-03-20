@@ -1,5 +1,6 @@
 import { useState } from "react";
 import API from "../services/api";
+import Navbar from "../components/Navbar";
 
 export default function PostItem() {
   const [form, setForm] = useState({
@@ -22,30 +23,48 @@ export default function PostItem() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        placeholder="Title"
-        onChange={(e) => setForm({ ...form, title: e.target.value })}
-      />
+    <>
+      <Navbar />
 
-      <textarea
-        placeholder="Description"
-        onChange={(e) => setForm({ ...form, description: e.target.value })}
-      />
+      <div className="max-w-md mx-auto mt-6 p-4 shadow-lg">
+        <h2 className="text-xl font-bold mb-4">Post Item</h2>
 
-      <select onChange={(e) => setForm({ ...form, type: e.target.value })}>
-        <option value="lost">Lost</option>
-        <option value="found">Found</option>
-      </select>
+        <form onSubmit={handleSubmit} className="space-y-3">
+          <input
+            className="w-full border p-2"
+            placeholder="Title"
+            value={form.title}
+            onChange={(e) => setForm({ ...form, title: e.target.value })}
+          />
 
-      <input
-        placeholder="Location"
-        onChange={(e) => setForm({ ...form, address: e.target.value })}
-      />
+          <textarea
+            className="w-full border p-2"
+            placeholder="Description"
+            value={form.description}
+            onChange={(e) => setForm({ ...form, description: e.target.value })}
+          />
 
-      <input type="file" onChange={(e) => setImage(e.target.files[0])} />
+          <select
+            className="w-full border p-2"
+            value={form.type}
+            onChange={(e) => setForm({ ...form, type: e.target.value })}
+          >
+            <option value="lost">Lost</option>
+            <option value="found">Found</option>
+          </select>
 
-      <button>Post Item</button>
-    </form>
+          <input
+            className="w-full border p-2"
+            placeholder="Location"
+            value={form.address}
+            onChange={(e) => setForm({ ...form, address: e.target.value })}
+          />
+
+          <input type="file" onChange={(e) => setImage(e.target.files[0])} />
+
+          <button className="w-full bg-black text-white p-2">Submit</button>
+        </form>
+      </div>
+    </>
   );
 }
