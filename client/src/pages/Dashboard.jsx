@@ -62,6 +62,18 @@ export default function Dashboard() {
           onChange={(e) => setSearch(e.target.value)}
         />
 
+        <div className="flex gap-6 mb-4 bg-gray-100 p-3 rounded">
+          <div className="text-sm font-semibold">
+            Total: <span className="text-blue-600">{items.length}</span>
+          </div>
+          <div className="text-sm font-semibold">
+            Lost: <span className="text-red-600">{items.filter((i) => i.type === "lost").length}</span>
+          </div>
+          <div className="text-sm font-semibold">
+            Found: <span className="text-green-600">{items.filter((i) => i.type === "found").length}</span>
+          </div>
+        </div>
+
         <div className="mb-4 space-x-2">
           <button onClick={() => setFilter("all")} className="btn">
             All
