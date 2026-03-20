@@ -6,13 +6,34 @@ import Navbar from "../components/Navbar";
 export default function Dashboard() {
   const [items, setItems] = useState([]);
   const [filter, setFilter] = useState("all");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    API.get("/items").then((res) => setItems(res.data));
+    API.get("/items")
+      .then((res) => setItems(res.data))
+      .finally(() => setLoading(false));
   }, []);
 
   const filteredItems =
     filter === "all" ? items : items.filter((item) => item.type === filter);
+
+  if (loading) {
+    return (
+      <>
+        <Navbar />
+        <p className="text-center mt-10">Loading items...</p>
+      </>
+    );
+  }
+
+  if (!items.length) {
+    return (
+      <>
+        <Navbar />
+        <p className="text-center mt-10">No items found 🚫</p>
+      </>
+    );
+  }
 
   return (
     <>
