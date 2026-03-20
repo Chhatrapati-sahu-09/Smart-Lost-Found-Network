@@ -6,6 +6,7 @@ import Navbar from "../components/Navbar";
 export default function Dashboard() {
   const [items, setItems] = useState([]);
   const [filter, setFilter] = useState("all");
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -14,8 +15,13 @@ export default function Dashboard() {
       .finally(() => setLoading(false));
   }, []);
 
-  const filteredItems =
-    filter === "all" ? items : items.filter((item) => item.type === filter);
+  const filteredItems = items.filter((item) => {
+    const matchesType = filter === "all" || item.type === filter;
+    const matchesSearch = item.title
+      .toLowerCase()
+      .includes(search.toLowerCase());
+    return matchesType && matchesSearch;
+  });
 
   if (loading) {
     return (
@@ -40,6 +46,12 @@ export default function Dashboard() {
       <Navbar />
 
       <div className="p-4">
+        <input
+          placeholder="Search items..."
+          className="border p-2 w-full mb-4"
+          onChange={(e) => setSearch(e.target.value)}
+        />
+
         <div className="mb-4 space-x-2">
           <button onClick={() => setFilter("all")} className="btn">
             All
