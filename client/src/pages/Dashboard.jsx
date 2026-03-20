@@ -98,16 +98,20 @@ export default function Dashboard() {
           <option value="Gwalior">Gwalior</option>
         </select>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {filteredItems.map((item) => (
-            <ItemCard
-              key={item._id}
-              item={item}
-              isFavorite={favorites.includes(item._id)}
-              onToggleFavorite={toggleFav}
-            />
-          ))}
-        </div>
+        {filteredItems.length ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {filteredItems.map((item) => (
+              <ItemCard
+                key={item._id}
+                item={item}
+                isFavorite={favorites.includes(item._id)}
+                onToggleFavorite={toggleFav}
+              />
+            ))}
+          </div>
+        ) : (
+          <p className="text-center mt-8 text-gray-600">No matching items found. Try adjusting your filters.</p>
+        )}
       </div>
     </>
   );
