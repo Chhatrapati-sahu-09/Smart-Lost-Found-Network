@@ -8,7 +8,14 @@ export default function Dashboard() {
   const [filter, setFilter] = useState("all");
   const [search, setSearch] = useState("");
   const [location, setLocation] = useState("");
+  const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const toggleFav = (id) => {
+    setFavorites((prev) =>
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id],
+    );
+  };
 
   useEffect(() => {
     API.get("/items")
@@ -78,7 +85,12 @@ export default function Dashboard() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {filteredItems.map((item) => (
-            <ItemCard key={item._id} item={item} />
+            <ItemCard
+              key={item._id}
+              item={item}
+              isFavorite={favorites.includes(item._id)}
+              onToggleFavorite={toggleFav}
+            />
           ))}
         </div>
       </div>

@@ -1,4 +1,4 @@
-export default function ItemCard({ item }) {
+export default function ItemCard({ item, isFavorite, onToggleFavorite }) {
   return (
     <div className="border rounded-lg p-3 shadow-md hover:scale-105 transition">
       <img
@@ -24,6 +24,10 @@ export default function ItemCard({ item }) {
       <p className="text-xs text-gray-400">
         {new Date(item.date).toLocaleDateString()}
       </p>
+
+      <button className="mt-2" onClick={() => onToggleFavorite(item._id)}>
+        {isFavorite ? "⭐" : "☆"}
+      </button>
     </div>
   );
 }
