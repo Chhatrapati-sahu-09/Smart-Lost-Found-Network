@@ -1,6 +1,6 @@
 export default function ItemCard({ item }) {
   return (
-    <div className="border rounded-lg p-3 shadow-md">
+    <div className="border rounded-lg p-3 shadow-md hover:scale-105 transition">
       <img
         src={item.image}
         alt={item.title}
@@ -20,6 +20,10 @@ export default function ItemCard({ item }) {
       </p>
 
       <p className="text-xs text-gray-500">📍 {item.location?.address}</p>
+
+      <p className="text-xs text-gray-400">
+        {new Date(item.date).toLocaleDateString()}
+      </p>
     </div>
   );
 }
