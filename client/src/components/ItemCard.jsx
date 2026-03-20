@@ -11,13 +11,15 @@ export default function ItemCard({ item, isFavorite, onToggleFavorite }) {
 
       <p className="text-sm text-gray-600">{item.description}</p>
 
-      <p
-        className={`mt-2 font-semibold ${
-          item.type === "lost" ? "text-red-500" : "text-green-600"
-        }`}
-      >
-        {item.type.toUpperCase()}
-      </p>
+      <div className="flex items-center gap-2 mt-2">
+        <span
+          className={`px-3 py-1 text-xs font-semibold rounded-full text-white ${
+            item.type === "lost" ? "bg-red-500" : "bg-green-600"
+          }`}
+        >
+          {item.type === "lost" ? "LOST" : "FOUND"}
+        </span>
+      </div>
 
       <p className="text-xs text-gray-500">📍 {item.location?.address}</p>
 
