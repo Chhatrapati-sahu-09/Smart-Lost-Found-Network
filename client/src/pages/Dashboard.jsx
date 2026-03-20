@@ -1,23 +1,42 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
+import ItemCard from "../components/ItemCard";
+import Navbar from "../components/Navbar";
 
 export default function Dashboard() {
   const [items, setItems] = useState([]);
+  const [filter, setFilter] = useState("all");
 
   useEffect(() => {
     API.get("/items").then((res) => setItems(res.data));
   }, []);
 
+  const filteredItems =
+    filter === "all" ? items : items.filter((item) => item.type === filter);
+
   return (
-    <div>
-      {items.map((item) => (
-        <div key={item._id}>
-          <h3>{item.title}</h3>
-          <p>{item.description}</p>
-          <p>{item.type}</p>
-          <img src={item.image} width="100" />
+    <>
+      <Navbar />
+
+      <div className="p-4">
+        <div className="mb-4 space-x-2">
+          <button onClick={() => setFilter("all")} className="btn">
+            All
+          </button>
+          <button onClick={() => setFilter("lost")} className="btn">
+            Lost
+          </button>
+          <button onClick={() => setFilter("found")} className="btn">
+            Found
+          </button>
         </div>
-      ))}
-    </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {filteredItems.map((item) => (
+            <ItemCard key={item._id} item={item} />
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
