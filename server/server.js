@@ -26,6 +26,8 @@ app.use(cors());
 
 // Routes
 app.use("/api/auth", require("./routes/authRoutes"));
+app.use("/api/items", require("./routes/itemRoutes"));
+app.use("/api/match", require("./routes/matchRoutes"));
 
 // Basic route
 app.get("/", (req, res) => {
