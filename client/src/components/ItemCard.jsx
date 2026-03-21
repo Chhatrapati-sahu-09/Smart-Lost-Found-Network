@@ -1,4 +1,8 @@
+import { useNavigate } from "react-router-dom";
+
 export default function ItemCard({ item, isFavorite, onToggleFavorite }) {
+  const navigate = useNavigate();
+
   return (
     <div className="border rounded-lg p-3 shadow-md hover:scale-105 transition">
       <img
@@ -27,9 +31,18 @@ export default function ItemCard({ item, isFavorite, onToggleFavorite }) {
         {new Date(item.date).toLocaleDateString()}
       </p>
 
-      <button className="mt-2" onClick={() => onToggleFavorite(item._id)}>
-        {isFavorite ? "⭐" : "☆"}
-      </button>
+      <div className="flex gap-2 mt-3">
+        <button className="flex-1" onClick={() => onToggleFavorite(item._id)}>
+          {isFavorite ? "⭐" : "☆"}
+        </button>
+        <button
+          onClick={() => navigate(`/matches/${item._id}`)}
+          className="flex-1 bg-blue-500 text-white p-2 rounded text-sm font-semibold hover:bg-blue-600"
+        >
+          View Matches
+        </button>
+      </div>
     </div>
   );
+}
 }
