@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import PostItem from "./pages/PostItem";
 import Dashboard from "./pages/Dashboard";
+import Matches from "./pages/Matches";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/post" element={<PostItem />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/matches/:id" element={<Matches />} />
       </Routes>
     </BrowserRouter>
   );
