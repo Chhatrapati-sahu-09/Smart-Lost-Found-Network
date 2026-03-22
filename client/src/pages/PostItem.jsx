@@ -1,6 +1,7 @@
 import { useState } from "react";
 import API from "../services/api";
 import Navbar from "../components/Navbar";
+import toast from "react-hot-toast";
 
 export default function PostItem() {
   const [form, setForm] = useState({
@@ -19,8 +20,12 @@ export default function PostItem() {
     Object.keys(form).forEach((key) => data.append(key, form[key]));
     if (image) data.append("image", image);
 
-    await API.post("/items", data);
-    alert("Item posted!");
+    try {
+      await API.post("/items", data);
+      toast.success("Item posted successfully!");
+    } catch (err) {
+      toast.error("Failed to post item");
+    }
   };
 
   return (
@@ -74,7 +79,11 @@ export default function PostItem() {
 
           {preview && (
             <div className="mt-3 border rounded p-2">
-              <img src={preview} alt="Preview" className="w-full max-h-48 object-cover rounded" />
+              <img
+                src={preview}
+                alt="Preview"
+                className="w-full max-h-48 object-cover rounded"
+              />
             </div>
           )}
 
