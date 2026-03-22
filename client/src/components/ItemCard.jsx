@@ -4,7 +4,7 @@ export default function ItemCard({ item, isFavorite, onToggleFavorite }) {
   const navigate = useNavigate();
 
   return (
-    <div className="border rounded-lg p-3 shadow-md hover:scale-105 transition">
+    <div className="border rounded-lg p-3 shadow-md hover:shadow-xl hover:scale-[1.02] transition-all duration-300">
       <img
         src={item.image}
         alt={item.title}
@@ -44,5 +44,4 @@ export default function ItemCard({ item, isFavorite, onToggleFavorite }) {
       </div>
     </div>
   );
-}
 }
