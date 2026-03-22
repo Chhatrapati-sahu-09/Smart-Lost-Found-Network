@@ -11,15 +11,19 @@ exports.getMatches = async (req, res) => {
 
   const items = await Item.find({ type: targetType });
 
-  const matches = items.map(item => {
+  const matches = items.map((item) => {
     const score = calculateScore(currentItem, item);
     return { item, score };
   });
 
   // filter + sort
   const filtered = matches
-    .filter(m => m.score > 20)
+    .filter((m) => m.score > 20)
     .sort((a, b) => b.score - a.score);
+
+  if (filtered.length > 0) {
+    await Item.findByIdAndUpdate(itemId, { matchFound: true });
+  }
 
   res.json(filtered);
 };
