@@ -54,7 +54,9 @@ export default function Dashboard() {
     return (
       <>
         <Navbar />
-        <p className="text-center mt-10">No items found 🚫</p>
+        <p className="text-center mt-10 text-gray-500">
+          No items yet. Start by posting one
+        </p>
       </>
     );
   }
