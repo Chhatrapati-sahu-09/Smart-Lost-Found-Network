@@ -24,19 +24,21 @@ export default function Dashboard() {
       .finally(() => setLoading(false));
   }, []);
 
-  const filteredItems = items.filter((item) => {
-    const matchesType = filter === "all" || item.type === filter;
-    const matchesSearch = item.title
-      .toLowerCase()
-      .includes(search.toLowerCase());
-    const matchesLocation =
-      !location || item.location?.address?.includes(location);
-    return matchesType && matchesSearch && matchesLocation;
-  }).sort((a, b) => {
-    const dateA = new Date(a.date);
-    const dateB = new Date(b.date);
-    return sort === "latest" ? dateB - dateA : dateA - dateB;
-  });
+  const filteredItems = items
+    .filter((item) => {
+      const matchesType = filter === "all" || item.type === filter;
+      const matchesSearch = item.title
+        .toLowerCase()
+        .includes(search.toLowerCase());
+      const matchesLocation =
+        !location || item.location?.address?.includes(location);
+      return matchesType && matchesSearch && matchesLocation;
+    })
+    .sort((a, b) => {
+      const dateA = new Date(a.date);
+      const dateB = new Date(b.date);
+      return sort === "latest" ? dateB - dateA : dateA - dateB;
+    });
 
   if (loading) {
     return (
@@ -75,10 +77,16 @@ export default function Dashboard() {
             Total: <span className="text-blue-600">{items.length}</span>
           </div>
           <div className="text-sm font-semibold">
-            Lost: <span className="text-red-600">{items.filter((i) => i.type === "lost").length}</span>
+            Lost:{" "}
+            <span className="text-red-600">
+              {items.filter((i) => i.type === "lost").length}
+            </span>
           </div>
           <div className="text-sm font-semibold">
-            Found: <span className="text-green-600">{items.filter((i) => i.type === "found").length}</span>
+            Found:{" "}
+            <span className="text-green-600">
+              {items.filter((i) => i.type === "found").length}
+            </span>
           </div>
         </div>
 
@@ -114,16 +122,24 @@ export default function Dashboard() {
         {filteredItems.length ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
             {filteredItems.map((item) => (
-              <ItemCard
-                key={item._id}
-                item={item}
-                isFavorite={favorites.includes(item._id)}
-                onToggleFavorite={toggleFav}
-              />
+              <div key={item._id}>
+                {item.matchFound && (
+                  <p className="text-green-600 font-semibold mb-2">
+                    Match Found!
+                  </p>
+                )}
+                <ItemCard
+                  item={item}
+                  isFavorite={favorites.includes(item._id)}
+                  onToggleFavorite={toggleFav}
+                />
+              </div>
             ))}
           </div>
         ) : (
-          <p className="text-center mt-8 text-gray-600">No matching items found. Try adjusting your filters.</p>
+          <p className="text-center mt-8 text-gray-600">
+            No matching items found. Try adjusting your filters.
+          </p>
         )}
       </div>
     </>
