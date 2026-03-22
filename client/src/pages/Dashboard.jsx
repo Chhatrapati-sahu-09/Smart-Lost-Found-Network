@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import API from "../services/api";
 import ItemCard from "../components/ItemCard";
 import Navbar from "../components/Navbar";
+import LoadingState from "../components/LoadingState";
 
 export default function Dashboard() {
   const [items, setItems] = useState([]);
@@ -44,10 +45,7 @@ export default function Dashboard() {
     return (
       <>
         <Navbar />
-        <div className="flex flex-col items-center justify-center mt-16">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          <p className="mt-4 text-gray-600">Loading items...</p>
-        </div>
+        <LoadingState message="Loading items..." />
       </>
     );
   }
