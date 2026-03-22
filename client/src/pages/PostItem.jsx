@@ -14,9 +14,17 @@ export default function PostItem() {
   });
   const [image, setImage] = useState(null);
   const [preview, setPreview] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!form.title.trim() || !form.description.trim()) {
+      toast.error("All fields required");
+      return;
+    }
+
+    setIsSubmitting(true);
 
     const data = new FormData();
     Object.keys(form).forEach((key) => data.append(key, form[key]));
@@ -28,6 +36,8 @@ export default function PostItem() {
       navigate("/dashboard");
     } catch (err) {
       toast.error("Failed to post item");
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -90,7 +100,12 @@ export default function PostItem() {
             </div>
           )}
 
-          <button className="w-full bg-black text-white p-2">Submit</button>
+          <button
+            disabled={isSubmitting}
+            className="w-full bg-black text-white p-2 disabled:opacity-60"
+          >
+            {isSubmitting ? "Posting..." : "Submit"}
+          </button>
         </form>
       </div>
     </>
