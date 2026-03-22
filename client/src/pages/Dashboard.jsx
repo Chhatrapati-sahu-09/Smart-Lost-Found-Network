@@ -12,6 +12,21 @@ export default function Dashboard() {
   const [favorites, setFavorites] = useState([]);
   const [loading, setLoading] = useState(true);
   const [sort, setSort] = useState("latest");
+  const [itemScope, setItemScope] = useState("all");
+
+  const token = localStorage.getItem("token");
+  let userId = null;
+  try {
+    userId = token ? JSON.parse(atob(token.split(".")[1])).id : null;
+  } catch {
+    userId = null;
+  }
+
+  const myItems = userId
+    ? items.filter((i) => i.user && i.user._id === userId)
+    : [];
+
+  const scopedItems = itemScope === "mine" ? myItems : items;
 
   const toggleFav = (id) => {
     setFavorites((prev) =>
@@ -25,7 +40,7 @@ export default function Dashboard() {
       .finally(() => setLoading(false));
   }, []);
 
-  const filteredItems = items
+  const filteredItems = scopedItems
     .filter((item) => {
       const matchesType = filter === "all" || item.type === filter;
       const matchesSearch = item.title
@@ -99,6 +114,12 @@ export default function Dashboard() {
           </button>
           <button onClick={() => setFilter("found")} className="btn">
             Found
+          </button>
+          <button onClick={() => setItemScope("all")} className="btn">
+            All Items
+          </button>
+          <button onClick={() => setItemScope("mine")} className="btn">
+            My Items
           </button>
         </div>
 
