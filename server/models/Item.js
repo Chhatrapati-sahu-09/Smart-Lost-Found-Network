@@ -26,6 +26,10 @@ const itemSchema = new mongoose.Schema({
     type: String,
     default: "open",
   },
+  matchFound: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 module.exports = mongoose.model("Item", itemSchema);
