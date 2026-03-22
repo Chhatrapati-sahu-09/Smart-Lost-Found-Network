@@ -1,9 +1,11 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../services/api";
 import Navbar from "../components/Navbar";
 import toast from "react-hot-toast";
 
 export default function PostItem() {
+  const navigate = useNavigate();
   const [form, setForm] = useState({
     title: "",
     description: "",
@@ -23,6 +25,7 @@ export default function PostItem() {
     try {
       await API.post("/items", data);
       toast.success("Item posted successfully!");
+      navigate("/dashboard");
     } catch (err) {
       toast.error("Failed to post item");
     }
