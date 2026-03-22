@@ -24,6 +24,7 @@ const itemSchema = new mongoose.Schema({
   },
   status: {
     type: String,
+    enum: ["open", "matched", "closed"],
     default: "open",
   },
   matchFound: {

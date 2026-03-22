@@ -34,6 +34,11 @@ export default function Dashboard() {
     );
   };
 
+  const handleResolve = async (id) => {
+    const res = await API.put(`/items/resolve/${id}`);
+    setItems((prev) => prev.map((item) => (item._id === id ? res.data : item)));
+  };
+
   useEffect(() => {
     API.get("/items")
       .then((res) => setItems(res.data))
@@ -153,6 +158,7 @@ export default function Dashboard() {
                   item={item}
                   isFavorite={favorites.includes(item._id)}
                   onToggleFavorite={toggleFav}
+                  onResolve={handleResolve}
                 />
               </div>
             ))}

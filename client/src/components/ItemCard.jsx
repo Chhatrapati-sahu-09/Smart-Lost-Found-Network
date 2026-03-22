@@ -1,6 +1,11 @@
 import { useNavigate } from "react-router-dom";
 
-export default function ItemCard({ item, isFavorite, onToggleFavorite }) {
+export default function ItemCard({
+  item,
+  isFavorite,
+  onToggleFavorite,
+  onResolve,
+}) {
   const navigate = useNavigate();
 
   return (
@@ -42,6 +47,13 @@ export default function ItemCard({ item, isFavorite, onToggleFavorite }) {
           View Matches
         </button>
       </div>
+      <button
+        onClick={() => onResolve(item._id)}
+        disabled={item.status === "closed"}
+        className="w-full mt-2 bg-gray-800 text-white p-2 rounded text-sm font-semibold disabled:opacity-50"
+      >
+        {item.status === "closed" ? "Resolved" : "Mark as Resolved"}
+      </button>
     </div>
   );
 }

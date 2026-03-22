@@ -30,3 +30,16 @@ exports.getItems = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.markResolved = async (req, res) => {
+  try {
+    const item = await Item.findByIdAndUpdate(
+      req.params.id,
+      { status: "closed" },
+      { new: true },
+    );
+    res.json(item);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
