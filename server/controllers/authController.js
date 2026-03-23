@@ -8,6 +8,21 @@ const escapeRegex = (str) => str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 const badRequest = (res, msg) => res.status(400).json({ msg });
 const serverError = (res) => res.status(500).json({ msg: "Server error" });
 
+const handleAuthError = (res, err, context) => {
+  console.error(`[auth:${context}]`, err);
+
+  if (err?.code === 11000) {
+    return badRequest(res, "User already exists");
+  }
+
+  if (err?.name === "ValidationError") {
+    const firstMessage = Object.values(err.errors || {})[0]?.message;
+    return badRequest(res, firstMessage || "Invalid user data");
+  }
+
+  return serverError(res);
+};
+
 /**
  * REGISTER - Creates a new user account with hashed password
  * POST /api/auth/register
@@ -56,7 +71,7 @@ exports.register = async (req, res) => {
 
     res.status(201).json({ msg: "User registered successfully" });
   } catch (err) {
-    serverError(res);
+    handleAuthError(res, err, "register");
   }
 };
 
@@ -106,6 +121,6 @@ exports.login = async (req, res) => {
       user: { id: user._id, name: user.name, email: user.email },
     });
   } catch (err) {
-    serverError(res);
+    handleAuthError(res, err, "login");
   }
 };
