@@ -43,3 +43,16 @@ exports.markResolved = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+exports.claimItem = async (req, res) => {
+  try {
+    const item = await Item.findByIdAndUpdate(
+      req.params.id,
+      { claimedBy: req.user },
+      { new: true },
+    );
+    res.json(item);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};

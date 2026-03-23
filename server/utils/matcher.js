@@ -10,7 +10,7 @@ function calculateScore(lost, found) {
   const lostWords = lost.description.toLowerCase().split(" ");
   const foundWords = found.description.toLowerCase().split(" ");
 
-  const common = lostWords.filter(word => foundWords.includes(word));
+  const common = lostWords.filter((word) => foundWords.includes(word));
   score += Math.min(common.length * 5, 30);
 
   // 3. Location match

@@ -22,6 +22,10 @@ const itemSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
   },
+  claimedBy: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
   status: {
     type: String,
     enum: ["open", "matched", "closed"],

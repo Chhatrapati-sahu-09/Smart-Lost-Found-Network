@@ -11,6 +11,7 @@ import Register from "./pages/Register";
 import PostItem from "./pages/PostItem";
 import Dashboard from "./pages/Dashboard";
 import Matches from "./pages/Matches";
+import Chat from "./pages/Chat";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/post" element={<PostItem />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/matches/:id" element={<Matches />} />
+        <Route path="/chat/:roomId" element={<Chat />} />
       </Routes>
     </BrowserRouter>
   );

@@ -39,6 +39,11 @@ export default function Dashboard() {
     setItems((prev) => prev.map((item) => (item._id === id ? res.data : item)));
   };
 
+  const handleClaim = async (id) => {
+    const res = await API.put(`/items/claim/${id}`);
+    setItems((prev) => prev.map((item) => (item._id === id ? res.data : item)));
+  };
+
   useEffect(() => {
     API.get("/items")
       .then((res) => setItems(res.data))
@@ -159,6 +164,7 @@ export default function Dashboard() {
                   isFavorite={favorites.includes(item._id)}
                   onToggleFavorite={toggleFav}
                   onResolve={handleResolve}
+                  onClaim={handleClaim}
                 />
               </div>
             ))}

@@ -41,7 +41,9 @@ export default function Matches() {
                   <h3 className="text-lg font-semibold">{m.item.title}</h3>
                   <div className="flex items-center gap-2">
                     {m.score > 60 && (
-                      <span className="text-green-600 font-bold">Best Match</span>
+                      <span className="text-green-600 font-bold">
+                        Best Match
+                      </span>
                     )}
                     <span className="bg-blue-500 text-white px-3 py-1 rounded-full text-sm font-bold">
                       Match: {m.score}%

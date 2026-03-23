@@ -5,6 +5,7 @@ export default function ItemCard({
   isFavorite,
   onToggleFavorite,
   onResolve,
+  onClaim,
 }) {
   const navigate = useNavigate();
 
@@ -53,6 +54,19 @@ export default function ItemCard({
         className="w-full mt-2 bg-gray-800 text-white p-2 rounded text-sm font-semibold disabled:opacity-50"
       >
         {item.status === "closed" ? "Resolved" : "Mark as Resolved"}
+      </button>
+      <button
+        onClick={() => onClaim(item._id)}
+        disabled={Boolean(item.claimedBy)}
+        className="w-full mt-2 bg-indigo-600 text-white p-2 rounded text-sm font-semibold disabled:opacity-50"
+      >
+        {item.claimedBy ? "Claimed" : "Claim Item"}
+      </button>
+      <button
+        onClick={() => navigate(`/chat/${item._id}`)}
+        className="w-full mt-2 bg-green-500 text-white p-2 rounded text-sm font-semibold hover:bg-green-600"
+      >
+        Chat
       </button>
     </div>
   );

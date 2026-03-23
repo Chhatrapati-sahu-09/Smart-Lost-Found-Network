@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
-	.btn {
-		@apply px-3 py-1 bg-gray-200 rounded;
-	}
+.btn {
+  padding: 0.25rem 0.75rem;
+  background-color: rgb(229 231 235);
+  border-radius: 0.25rem;
 }
