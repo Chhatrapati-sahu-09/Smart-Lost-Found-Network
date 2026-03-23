@@ -4,6 +4,7 @@
   "description": "Backend for Smart Lost & Found Network",
   "main": "server.js",
   "scripts": {
+    "predev": "node ./scripts/free-port.js",
     "start": "node server.js",
     "dev": "node ./node_modules/nodemon/bin/nodemon.js server.js"
   },

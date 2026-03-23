@@ -42,7 +42,7 @@ export default function Register() {
       await axios.post("http://localhost:5000/api/auth/register", form);
       alert("Registered Successfully! Please login.");
       // Redirect to login page after successful registration
-      navigate("/");
+      navigate("/login");
     } catch (err) {
       // Display error message from server or generic fallback
       setError(err.response?.data?.msg || "Registration failed");
@@ -97,7 +97,7 @@ export default function Register() {
         </form>
         <p>
           Already have an account?{" "}
-          <a href="/" style={styles.link}>
+          <a href="/login" style={styles.link}>
             Login here
           </a>
         </p>
